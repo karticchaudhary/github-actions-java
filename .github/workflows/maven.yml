@@ -28,7 +28,4 @@ jobs:
 
       - name: Check Status
         if: ${{ steps.vars.outputs.docker_tag }} != 200
-        uses: actions/github-script@v3
-        with:
-          script: |
-            core.setFailed('Application not up!!')
+        run: exit 1
