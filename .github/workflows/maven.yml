@@ -28,7 +28,7 @@ jobs:
 
           echo $http_status
 
-          if [  contains( ${{ $http_status }}, '301') ]; then
+          if [  contains( $http_status , '301') ]; then
           	echo "this is HTTP Status 301"
           else
                   echo "not 200"
