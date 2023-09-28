@@ -28,4 +28,6 @@ jobs:
 
       - name: Check Status
         if: ${{ steps.vars.outputs.docker_tag }} != 200
-        run: exit 1
+        run: |
+          echo ${{ steps.vars.outputs.docker_tag }}
+          exit 1
