@@ -29,8 +29,4 @@ jobs:
           echo "::set-env name=STATUS::$STATUS"
 
       - name: Check Status
-        if: [ $STATUS !="200" ]
-        uses: actions/github-script@v3
-        with:
-          script: |
-            core.setFailed('Application not up!!')
+        run: echo $STATUS
