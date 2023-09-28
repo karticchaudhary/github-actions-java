@@ -21,15 +21,48 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - name: Run health check !
-        id: vars
+      - name: Install xmllint
+        run: sudo apt-get install -y libxml2-utils
+
+      - name: Run health check for PPS !
         run: |
-          http_status=`curl -s -I https://google.com`
+          export STATUS=curl -sIXGET https://payment-plan-service-pr-63.rcp.us-west-2.orders.test.exp-aws.net/actuator/health
+           if [  STATUS != 301 ]; then
+            echo "this is HTTP Status 301"
+           else
+            echo "not 200"
+            fi
+#        uses: actions/github-script@v3
 
-          echo $http_status
+#      - name: Check Status
+#        if: [ $STATUS !="200" ]
+#        uses: actions/github-script@v3
+#        with:
+#          script: |
+#            core.setFailed('Application not up!!')
 
-          if [  contains( $http_status , '301') ]; then
-          	echo "this is HTTP Status 301"
-          else
-                  echo "not 200"
-          fi
+#      - name: Run health check !
+#        id: vars
+#        run: |
+#          http_status=`curl -s -I https://google.com`
+#
+#          echo $http_status
+#
+#          if [  contains( $http_status , '301') ]; then
+#          	echo "this is HTTP Status 301"
+#          else
+#                  echo "not 200"
+#          fi
+#
+#          - name: Run health check for PPS !
+#            run: |
+#              export STATUS=curl -sIXGET https://payment-plan-service-${{ github.event.deployment_status.environment }}.rcp.us-west-2.orders.test.exp-aws.net/actuator/health
+#              echo "::set-env name=STATUS::$STATUS"
+#            uses: actions/github-script@v3
+#
+#          - name: Check Status
+#            if: [ $STATUS !="200" ]
+#            uses: actions/github-script@v3
+#            with:
+#              script: |
+#                core.setFailed('Application not up!!')
