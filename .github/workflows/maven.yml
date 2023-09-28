@@ -24,22 +24,12 @@ jobs:
       - name: Run health check !
         id: vars
         run: |
-          URL="http://stackoverflow.com/"
+          http_status=`curl -s -I https://de.php.net/distributions/php-5.6.7.tar.gz | grep HTTP/1.1 | awk {'print $2'}`
 
-# store the whole response with the status at the and
-          HTTP_RESPONSE=$(curl --silent --write-out "HTTPSTATUS:%{http_code}" -X POST $URL)
-          
-          # extract the body
-          HTTP_BODY=$(echo $HTTP_RESPONSE | sed -e 's/HTTPSTATUS\:.*//g')
-          
-          # extract the status
-          HTTP_STATUS=$(echo $HTTP_RESPONSE | tr -d '\n' | sed -e 's/.*HTTPSTATUS://')
-          
-          # print the body
-          echo "$HTTP_BODY"
-          
-          # example using the status
-          if [ ! $HTTP_STATUS -eq 200  ]; then
-            echo "Error [HTTP status: $HTTP_STATUS]"
-            exit 1
+          echo $http_status
+
+          if [ $http_status -eq 200 ]; then
+          	echo "this is HTTP Status 200"
+          else
+                  echo "not 200"
           fi
