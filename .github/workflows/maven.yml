@@ -23,7 +23,7 @@ jobs:
 
       - name: Run health check !
         run: |
-          export STATUS=curl -sIXGET https://google.com
+          export STATUS=curl -X GET https://google.com
           echo "::set-env name=STATUS::$STATUS"
 
       - name: Check Status
