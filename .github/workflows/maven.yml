@@ -22,9 +22,13 @@ jobs:
     steps:
 
       - name: Run health check !
+        id: vars
         run: |
-          export STATUS=200
-          echo "::set-env name=STATUS::$STATUS"
+          echo "docker_tag=200" >> $GITHUB_OUTPUT
 
       - name: Check Status
-        run: echo $STATUS
+        if: ${{ steps.vars.outputs.docker_tag }} != 200
+        uses: actions/github-script@v3
+        with:
+          script: |
+            core.setFailed('Application not up!!')
