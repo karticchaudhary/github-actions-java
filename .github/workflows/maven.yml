@@ -24,7 +24,7 @@ jobs:
       - name: Run health check !
         id: vars
         run: |
-          http_status=`curl -s -I https://de.php.net/distributions/php-5.6.7.tar.gz | grep HTTP/1.1 | awk {'print $2'}`
+          http_status=`curl -s -I https://google.com
 
           echo $http_status
 
