@@ -18,7 +18,7 @@ jobs:
   build:
     # This will run when a branch deployment that starts with 'pr-' succeeds. This should match the format of your instance parameter.
     name: TEST
-    runs-on: eg-default
+    runs-on: ubuntu-latest
     steps:
 
       - name: Run health check !
