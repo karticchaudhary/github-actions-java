@@ -24,12 +24,12 @@ jobs:
       - name: Run health check !
         id: vars
         run: |
-          http_status=`curl -s -I https://google.com | grep HTTP/1.1 | awk {'print $2'}`
+          http_status=`curl -s -I https://google.com`
 
           echo $http_status
 
-          if [ $http_status -eq 200 ]; then
-          	echo "this is HTTP Status 200"
+          if [  contains( ${{ $http_status }}, '301') ]; then
+          	echo "this is HTTP Status 301"
           else
                   echo "not 200"
           fi
