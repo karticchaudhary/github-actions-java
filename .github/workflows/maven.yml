@@ -25,4 +25,4 @@ jobs:
         run: sudo apt-get install -y libxml2-utils
 
       - name: Run health check for PPS !
-        run: curl GET https://goooggggleesd.com
+        run: curl GET https://google.com
